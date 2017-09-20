@@ -16,11 +16,15 @@ public class KeyScript : MonoBehaviour {
         KeyboardInputField.Instance.UpdateInputField(gameObject.name);
     }
 
+    public void BackspaceClicked()
+    {
+        KeyboardInputField.Instance.UpdateInputField(gameObject.name);
+    }
+
     public void ContinueClicked()
     {
-        Debug.Log("CLICKED");
         KeyboardInputField.Instance.NameSelection += 1;
-        KeyboardInputField.Instance.FirstNameField();
+        KeyboardInputField.Instance.NameField();
     }
 
 }

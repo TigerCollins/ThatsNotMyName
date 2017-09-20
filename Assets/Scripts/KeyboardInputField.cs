@@ -7,11 +7,15 @@ public class KeyboardInputField : MonoBehaviour {
 
     public static KeyboardInputField Instance;
 
-    public Text FirstName;
-    public Text MiddleName;
-    public Text LastName;
+    public string FirstName;
+    public string MiddleName;
+    public string LastName;
 
     public Text InputField;
+    public Text PlayerName;
+
+    public Text NamePrompt;
+    public GameObject NamePromptObject;
 
     public int NameSelection = 0;
 
@@ -27,17 +31,79 @@ public class KeyboardInputField : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if(Input.GetKeyDown("space"))
+        PlayerName.text = "My name is " + FirstName + " " + MiddleName + " " + LastName;
+        TextPrompt();
+    }
+
+    public void NameField()
+    {
+        if (NameSelection == 1)
         {
-            
+            NamePrompt.text = "Middle or Preferred Name...";//Easier to put this here than fix it (should be selection 2)
+            if (InputField.text == "")
+            {
+                NameSelection -= 1;
+            }
+            else
+            {
+                FirstName = InputField.text;
+                InputField.text = "";
+            }
+        }
+
+        if (NameSelection == 2)
+        {
+            NamePrompt.text = "Last Name...";//Easier to put this here than fix it (should be selection 3)
+            if (InputField.text == "")
+            {
+                NameSelection -= 1;
+            }
+            else
+            {
+                MiddleName = InputField.text;
+                InputField.text = "";
+            }
+        }
+
+        if (NameSelection == 3)
+        {
+            NamePrompt.text = "Please Confirm Your Selection...";
+            if (InputField.text == "")
+            {
+                NameSelection -= 1;
+            }
+            else
+            {
+                LastName = InputField.text;
+                InputField.text = "";
+            }
+        }
+
+        if (NameSelection == 4)
+        {
+        }
+
+    }
+
+    public void TextPrompt()
+    {
+        
+        if (InputField.text.Length == 0)
+        {
+            NamePromptObject.SetActive(true);
+        }
+
+        else
+        {
+            NamePromptObject.SetActive(false);
         }
     }
 
     public void UpdateInputField(string input)
     {
-        if (input == "Space")
+        if (input == "Backspace")
         {
-            InputField.text += " ";
+            InputField.text = InputField.text.Substring(0, InputField.text.Length - 1);
         }
 
         else
@@ -46,29 +112,7 @@ public class KeyboardInputField : MonoBehaviour {
         }
     }
 
-    public void FirstNameField()
-    {
-        Debug.Log("name select" + NameSelection + " text is: " + InputField.text);
-        if (NameSelection == 1)
-        {
-            FirstName.text = InputField.text;
-
-        }
-
-        if (NameSelection == 2)
-        {
-            MiddleName.text = InputField.text;
-        }
-
-        if (NameSelection == 3)
-        {
-        }
-
-        if (NameSelection == 4)
-        {
-        }
-
-    }
+    
 
 
 }
