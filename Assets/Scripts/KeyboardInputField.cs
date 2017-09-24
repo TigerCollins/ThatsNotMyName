@@ -7,17 +7,28 @@ public class KeyboardInputField : MonoBehaviour {
 
     public static KeyboardInputField Instance;
 
+    //String name variables
     public string FirstName;
     public string MiddleName;
     public string LastName;
 
+    //Text for inputfields (as a variable)
     public Text InputField;
     public Text PlayerName;
 
+    //Variables for name prompts
     public Text NamePrompt;
     public GameObject NamePromptObject;
 
+    //Variable to keep track of first, second and last name
     public int NameSelection = 0;
+
+    //Keeps track of initial name input and repetitive inputs
+    public bool InitalInput;
+    public string RepeatFirstName;
+    public string RepeatPreferredName;
+    public string RepeatLastName;
+
 
 
 
@@ -25,64 +36,105 @@ public class KeyboardInputField : MonoBehaviour {
     void Awake ()
     {
         Instance = this;
-       // FirstName.text = "blah";
-	}
+        InitalInput = true;
+
+        RepeatFirstName = PlayerPrefs.GetString("First Name");
+        RepeatPreferredName = PlayerPrefs.GetString("Middle Name");
+        RepeatLastName = PlayerPrefs.GetString("Last Name");
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
         PlayerName.text = "My name is " + FirstName + " " + MiddleName + " " + LastName;
         TextPrompt();
+        PlayerNamePreview();
     }
 
+    public void PlayerNamePreview()
+    {
+        if (InitalInput == true)
+        {
+            PlayerName.text = "My name is " + FirstName + " " + MiddleName + " " + LastName;
+        }
+
+        if (InitalInput == false)
+        {
+            PlayerName.text = "Yeah, my name is " + RepeatFirstName + " but I'd prefer to go by" + MiddleName;
+        }
+    }
     public void NameField()
     {
-        if (NameSelection == 1)
+        //Initial Name Input
+        if (InitalInput == true)
         {
-            NamePrompt.text = "Middle or Preferred Name...";//Easier to put this here than fix it (should be selection 2)
-            if (InputField.text == "")
+            NameSelection = 0;
+            if (NameSelection == 1)
             {
-                NameSelection -= 1;
+                NamePrompt.text = "Middle or Preferred Name...";//Easier to put this here than fix it (should be selection 2)
+                if (InputField.text == "")
+                {
+                    NameSelection -= 1;
+                }
+                else
+                {
+                    FirstName = InputField.text;
+                    InputField.text = "";
+                    PlayerPrefs.SetString("First Name", FirstName);
+                }
             }
-            else
+
+            if (NameSelection == 2)
             {
-                FirstName = InputField.text;
-                InputField.text = "";
+                NamePrompt.text = "Last Name...";//Easier to put this here than fix it (should be selection 3)
+                if (InputField.text == "")
+                {
+                    NameSelection -= 1;
+                }
+                else
+                {
+                    MiddleName = InputField.text;
+                    InputField.text = "";
+                    PlayerPrefs.SetString("Middle Name", MiddleName);
+                }
+            }
+
+            if (NameSelection == 3)
+            {
+                NamePrompt.text = "Please Confirm Your Selection...";
+                if (InputField.text == "")
+                {
+                    NameSelection -= 1;
+                }
+                else
+                {
+                    LastName = InputField.text;
+                    InputField.text = "";
+                    PlayerPrefs.SetString("Last Name", LastName);
+                }
             }
         }
-
-        if (NameSelection == 2)
+        //Secondary Name Input
+        if (InitalInput == false)
         {
-            NamePrompt.text = "Last Name...";//Easier to put this here than fix it (should be selection 3)
-            if (InputField.text == "")
+            NameSelection = 0;
+            FirstName = RepeatFirstName;
+            LastName = RepeatLastName;
+            if (NameSelection == 0)
             {
-                NameSelection -= 1;
-            }
-            else
-            {
-                MiddleName = InputField.text;
-                InputField.text = "";
+                NamePrompt.text = "Middle or Preferred Name...";//Easier to put this here than fix it (should be selection 2)
+                if (InputField.text == "")
+                {
+                    NameSelection -= 1;
+                }
+                else
+                {
+                    FirstName = InputField.text;
+                    InputField.text = "";
+                    
+                }
             }
         }
-
-        if (NameSelection == 3)
-        {
-            NamePrompt.text = "Please Confirm Your Selection...";
-            if (InputField.text == "")
-            {
-                NameSelection -= 1;
-            }
-            else
-            {
-                LastName = InputField.text;
-                InputField.text = "";
-            }
-        }
-
-        if (NameSelection == 4)
-        {
-        }
-
     }
 
     public void TextPrompt()
@@ -113,6 +165,4 @@ public class KeyboardInputField : MonoBehaviour {
     }
 
     
-
-
 }
