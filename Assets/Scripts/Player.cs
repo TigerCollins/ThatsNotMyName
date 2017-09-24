@@ -17,18 +17,19 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        
         PlayerMovement();
 	}
 
     void PlayerMovement()
     {
-        if (Input.GetAxis("Vertical") != 0)
-        {
-            transform.Translate(Vector3.forward * Input.GetAxis("Vertical") * Time.deltaTime * speed);
-        }
-        if (Input.GetAxis("Horizontal") != 0)
-        {
-            transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * Time.deltaTime * speed);
-        }
+        float moveHorizontal = Input.GetAxisRaw("Horizontal");
+        float moveVertical = Input.GetAxisRaw("Vertical");
+
+
+        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+        transform.rotation = Quaternion.LookRotation(movement);
+
+        transform.Translate(movement * speed * Time.deltaTime, Space.World);
     }
 }

@@ -14,6 +14,9 @@ public class AI : MonoBehaviour {
     private string MiddleName;
     private string LastName;
 
+    //Dialogue
+    public int DialogueTracker = 0; //useless right now
+
     // Use this for initialization
     private void OnTriggerStay(Collider other)
     {
