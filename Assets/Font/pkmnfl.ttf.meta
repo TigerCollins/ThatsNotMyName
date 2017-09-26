@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: df0364b6b7353264caa0a1177f4d17c2
+timeCreated: 1506345884
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Power Red and Green
+  fontNames:
+  - Power Red and Green
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

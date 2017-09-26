@@ -5,20 +5,31 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     public float speed;
+    private Vector3 movement;
+
+    private Component rigidBody;
+
+    
     // Use this for initialization
 
     
 
 
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    void Start ()
+    {
+        rigidBody = GetComponent<Rigidbody>();
+    }
+
+    // Update is called once per frame
+    private void FixedUpdate()
+    {
+        PlayerMovement();
+        ParticleUpdate();
+    }
+
+    void Update ()
     {
         
-        PlayerMovement();
 	}
 
     void PlayerMovement()
@@ -27,9 +38,41 @@ public class Player : MonoBehaviour {
         float moveVertical = Input.GetAxisRaw("Vertical");
 
 
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+        movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
         transform.rotation = Quaternion.LookRotation(movement);
 
         transform.Translate(movement * speed * Time.deltaTime, Space.World);
+    }
+
+    void ParticleUpdate()
+    {
+        bool Moving;
+        if (Input.GetAxisRaw("Horizontal")!=1 && Input.GetAxisRaw("Vertical") != 1 && Input.GetAxisRaw("Horizontal") != 1 && Input.GetAxisRaw("Vertical") != -1 && Input.GetAxisRaw("Horizontal") != -1)
+        {
+            Moving = false;
+        }
+
+        else
+        {
+            Moving = true;
+        }
+
+        if (Moving == true)
+        {
+            if(GetComponent<ParticleSystem>().IsAlive() == false)
+            {
+                GetComponent<ParticleSystem>().Play();
+            }
+
+            else
+            {
+
+            }
+        }
+
+        else 
+        {
+            GetComponent<ParticleSystem>().Stop();
+        }
     }
 }

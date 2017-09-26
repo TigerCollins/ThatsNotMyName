@@ -27,7 +27,8 @@ public class KeyScript : MonoBehaviour {
     {
         KeyboardInputField.Instance.NameSelection += 1;
         KeyboardInputField.Instance.NameField();
-        
+        KeyboardInputField.Instance.NameFields();
+
     }
 
     public void ConfirmSelection()

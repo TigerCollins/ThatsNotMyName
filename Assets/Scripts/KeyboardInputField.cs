@@ -63,12 +63,18 @@ public class KeyboardInputField : MonoBehaviour {
             PlayerName.text = "Yeah, my name is " + RepeatFirstName + " but I'd prefer to go by" + MiddleName;
         }
     }
+
+    public void NameFields()
+    {
+        print("lol");
+    }
+
     public void NameField()
     {
         //Initial Name Input
         if (InitalInput == true)
         {
-            NameSelection = 0;
+           // NameSelection = 0;
             if (NameSelection == 1)
             {
                 NamePrompt.text = "Middle or Preferred Name...";//Easier to put this here than fix it (should be selection 2)
@@ -114,6 +120,7 @@ public class KeyboardInputField : MonoBehaviour {
                 }
             }
         }
+        /*
         //Secondary Name Input
         if (InitalInput == false)
         {
@@ -135,6 +142,7 @@ public class KeyboardInputField : MonoBehaviour {
                 }
             }
         }
+        */
     }
 
     public void TextPrompt()
