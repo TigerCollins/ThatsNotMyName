@@ -4,18 +4,28 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
+    public static Player Instance;
+
     public float speed;
     private Vector3 movement;
 
     private Component rigidBody;
+    Quaternion oldRotation;
 
-    
+    public bool CanMove;
+
+
+
     // Use this for initialization
+    private void Awake()
+    {
+        GetComponent<ParticleSystem>().Stop();
+        Instance = this;
+        speed = 6f;
+        CanMove = false;
+    }
 
-    
-
-
-    void Start ()
+    void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
     }
@@ -25,54 +35,70 @@ public class Player : MonoBehaviour {
     {
         PlayerMovement();
         ParticleUpdate();
+        UpdateRotation();
     }
 
-    void Update ()
+    void Update()
     {
-        
-	}
+
+    }
 
     void PlayerMovement()
     {
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
         float moveVertical = Input.GetAxisRaw("Vertical");
-
-
-        movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-        transform.rotation = Quaternion.LookRotation(movement);
-
-        transform.Translate(movement * speed * Time.deltaTime, Space.World);
-    }
-
-    void ParticleUpdate()
-    {
-        bool Moving;
-        if (Input.GetAxisRaw("Horizontal")!=1 && Input.GetAxisRaw("Vertical") != 1 && Input.GetAxisRaw("Horizontal") != 1 && Input.GetAxisRaw("Vertical") != -1 && Input.GetAxisRaw("Horizontal") != -1)
+        if(CanMove == true)
         {
-            Moving = false;
-        }
-
-        else
-        {
-            Moving = true;
-        }
-
-        if (Moving == true)
-        {
-            if(GetComponent<ParticleSystem>().IsAlive() == false)
+            if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
             {
-                GetComponent<ParticleSystem>().Play();
+                movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+                transform.rotation = Quaternion.LookRotation(movement);
+                transform.Translate(movement * speed * Time.deltaTime, Space.World);
             }
 
             else
             {
+                UpdateRotation();
+            }
+        }
+        
+    }
+
+    void ParticleUpdate()
+    {
+        
+        if (CanMove == true)
+        {
+            // If no keyboard press, moving is false.
+            if (Input.GetAxisRaw("Horizontal") != 1 && Input.GetAxisRaw("Vertical") != 1 && Input.GetAxisRaw("Horizontal") != 1 && Input.GetAxisRaw("Vertical") != -1 && Input.GetAxisRaw("Horizontal") != -1)
+            {
+                GetComponent<ParticleSystem>().Stop();
+            }
+
+            else
+            {
+                if (transform.rotation == oldRotation)
+                {
+                    if (GetComponent<ParticleSystem>().IsAlive() == false)
+                    {
+                        GetComponent<ParticleSystem>().Play();
+                    }
+                }
+
+                else
+                {
+                    GetComponent<ParticleSystem>().Play();
+                    Debug.Log("Direction Changed!");
+                }
 
             }
         }
+        
+    }
 
-        else 
-        {
-            GetComponent<ParticleSystem>().Stop();
-        }
+    void UpdateRotation()
+    {
+        oldRotation = transform.rotation;
+        Debug.Log(oldRotation);
     }
 }

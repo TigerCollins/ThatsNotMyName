@@ -6,8 +6,13 @@ namespace UnityStandardAssets.ImageEffects
     [ExecuteInEditMode]
     [RequireComponent (typeof(Camera))]
     [AddComponentMenu ("Image Effects/Camera/Vignette and Chromatic Aberration")]
+
+     
     public class VignetteAndChromaticAberration : PostEffectsBase
     {
+
+        public static VignetteAndChromaticAberration Instance;
+
         public enum AberrationMode
         {
             Simple = 0,
@@ -32,6 +37,11 @@ namespace UnityStandardAssets.ImageEffects
         private Material m_SeparableBlurMaterial;
         private Material m_ChromAberrationMaterial;
 
+
+        private void Awake()
+        {
+            Instance = this;
+        }
 
         public override bool CheckResources ()
         {

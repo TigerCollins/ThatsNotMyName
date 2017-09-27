@@ -35,7 +35,7 @@ public class KeyScript : MonoBehaviour {
     {
         if (NamePosition == 3)
         {
-            Application.LoadLevel("World");
+            Application.LoadLevel("Dialogue");
         }
     }
 

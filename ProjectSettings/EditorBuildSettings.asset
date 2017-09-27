@@ -14,3 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/Keyboard.unity
     guid: 954121876fe29b4448454afcdb4c2388
+  - enabled: 1
+    path: Assets/Scene/Credits.unity
+    guid: ff685b5f98d058345ae0b05d614564d2
+  - enabled: 1
+    path: Assets/Scene/Dialogue.unity
+    guid: ee76623213ee5d444815a7da35d433f0
