@@ -14,11 +14,9 @@ public class Player : MonoBehaviour {
 
     public bool CanMove;
 
-    public AudioClip PlayerMovementNoise;
-
-    public bool Moving;
-
-
+    public AudioSource PlayerMovementNoise;
+    public float minPitch;
+    public float maxPitch;
 
     // Use this for initialization
     private void Awake()
@@ -27,7 +25,6 @@ public class Player : MonoBehaviour {
         Instance = this;
         speed = 6f;
         CanMove = false;
-        Moving = false;
     }
 
     void Start()
@@ -59,7 +56,6 @@ public class Player : MonoBehaviour {
                 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
                 transform.rotation = Quaternion.LookRotation(movement);
                 transform.Translate(movement * speed * Time.deltaTime, Space.World);
-                Moving = true;
                 MovementNoise();
             }
 
@@ -75,7 +71,11 @@ public class Player : MonoBehaviour {
 
     public void MovementNoise()
     {
-        AudioController.Instance.PlaySingle(PlayerMovementNoise, true);
+        PlayerMovementNoise.pitch = Random.Range(minPitch, maxPitch);
+        if (PlayerMovementNoise.isPlaying == false)
+        {
+            PlayerMovementNoise.Play();
+        }
     }
     void ParticleUpdate()
     {

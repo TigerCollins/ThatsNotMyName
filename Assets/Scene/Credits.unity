@@ -1339,9 +1339,12 @@ MonoBehaviour:
     m_LineSpacing: 1.6
   m_Text: "Level Designer\n\nSholto Tiger Collins\n----\n\nProgrammer\n\nSholto Tiger
     Collins\n----\n\nAudio Designer\n\nSholto Tiger Collins\n----\n\nAudio\n\nKevin
-    MacLeod - Industrious Ferret\n----\n\nUnity Assets\n\nProCore - ProBuilder Basic\n----\n\nSoftware\n\nUnity
-    2017\nAdobe Photoshop CC\nAdobe Premier Pro CC\nMagicaVoxel\n----\n\nSpecial Thanks
-    To\n\nDaryl Long\nMitchell Pryor\nBrendan Keogh\nLanz Jordan \n"
+    MacLeod - Industrious Ferret\nKevin MacLeod - Take a Chance\nKamilNaidoo23 - Car
+    Door Slam SFX.wav\nSoundEffectsMachine\r - Triggered Sound Effect\n----\n\nUnity
+    Assets\n\nProCore - ProBuilder Basic\n----\n\nFonts\n\n(Cannot be specifically
+    found. No copyright on work) - pkmnfl\n----\n\nSoftware\n\nUnity 2017\nAdobe Photoshop
+    CC\nAdobe Premier Pro CC\nMagicaVoxel\n----\n\nSpecial Thanks To\n\nDaryl Long\nMitchell
+    Pryor\nBrendan Keogh\nLanz Jordan \n"
 --- !u!222 &1110452082
 CanvasRenderer:
   m_ObjectHideFlags: 0
