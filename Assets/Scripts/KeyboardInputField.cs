@@ -77,7 +77,7 @@ public class KeyboardInputField : MonoBehaviour {
            // NameSelection = 0;
             if (NameSelection == 1)
             {
-                NamePrompt.text = "Middle or Preferred Name...";//Easier to put this here than fix it (should be selection 2)
+                NamePrompt.text = "What you actually want to be called...";//Easier to put this here than fix it (should be selection 2)
                 if (InputField.text == "")
                 {
                     NameSelection -= 1;

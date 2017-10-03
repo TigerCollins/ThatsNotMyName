@@ -14,6 +14,10 @@ public class Player : MonoBehaviour {
 
     public bool CanMove;
 
+    public AudioClip PlayerMovementNoise;
+
+    public bool Moving;
+
 
 
     // Use this for initialization
@@ -23,6 +27,7 @@ public class Player : MonoBehaviour {
         Instance = this;
         speed = 6f;
         CanMove = false;
+        Moving = false;
     }
 
     void Start()
@@ -34,13 +39,13 @@ public class Player : MonoBehaviour {
     private void FixedUpdate()
     {
         PlayerMovement();
-        ParticleUpdate();
+        
         UpdateRotation();
     }
 
     void Update()
     {
-
+        ParticleUpdate();
     }
 
     void PlayerMovement()
@@ -54,16 +59,24 @@ public class Player : MonoBehaviour {
                 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
                 transform.rotation = Quaternion.LookRotation(movement);
                 transform.Translate(movement * speed * Time.deltaTime, Space.World);
+                Moving = true;
+                MovementNoise();
             }
 
             else
             {
                 UpdateRotation();
             }
-        }
-        
+            
+            print("fkn rip");
+        } 
     }
 
+
+    public void MovementNoise()
+    {
+        AudioController.Instance.PlaySingle(PlayerMovementNoise, true);
+    }
     void ParticleUpdate()
     {
         

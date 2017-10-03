@@ -1,8 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
-public class SceneController : MonoBehaviour {
+public class SceneController : MonoBehaviour
+{
 
     public GameObject PauseMenu;
     public GameObject QuitMenu;
@@ -16,13 +20,14 @@ public class SceneController : MonoBehaviour {
         Time.timeScale = 1;
     }
 
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    void Start() {
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
+
+
         Pause();
 	}
 
@@ -76,6 +81,5 @@ public class SceneController : MonoBehaviour {
     {
         QuitMenu.SetActive(false);
         QuitButton.Select();
-
     }
 }

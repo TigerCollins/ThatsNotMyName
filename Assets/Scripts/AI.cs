@@ -68,6 +68,7 @@ namespace UnityStandardAssets.ImageEffects
             DialogueProgressCheck = false;
 
             Instance = this;
+
         }
 
         void Start()
